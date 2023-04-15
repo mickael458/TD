@@ -20,4 +20,4 @@ Il est préférable de vérifier qu'un fichier token.bin n'est pas déjà prése
 
 # Question 4
 
-Pour vérifier que la clé est correcte, vous pouvez dériver une clé candidate à partir du sel et de la clé candidate et comparer cette clé dérivée avec la clé stockée. Si les deux clés dérivées correspondent, cela signifie que la clé candidate est correcte.
+Pour confirmer que la clé entrée est valide, on peut réaliser un processus de dérivation de clé en utilisant le sel. Ensuite, il suffit de comparer le résultat obtenu avec le token stocké. Si ces éléments correspondent, cela indique que la clé est correcte et peut être employée pour décoder les données.

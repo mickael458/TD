@@ -102,10 +102,10 @@ class SecretManager:
 
     def check_key(self, candidate_key: bytes) -> bool:
         # Verify if the candidate key is valid
-        derived_key = self.do_derivation(self._salt, candidate_key)
-
+        (self.do_derivation(self._salt, candidate_key)) == self._token
+        return self.do_derivation(self._salt, candidate_key)
         # Compare the derived key with the stored key
-        if self._key == derived_key:
+        if self._key == (self.do_derivation(self._salt, candidate_key)):
             return True
         else:
             return False

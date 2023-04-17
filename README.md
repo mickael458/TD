@@ -12,7 +12,7 @@ Cet algorithme n'est pas robuste pour plusieurs raisons:
 
 # Question 2
 
-L'algorithme XOR n'est pas considéré comme étant particulièrement robuste, car il est vulnérable à plusieurs types d'attaques, telles que l'attaque par force brute, l'attaque par analyse de fréquence et l'attaque par clair connu (known-plaintext attack).Les fonctions de dérivation de clé (KDF) sont spécialement conçues pour créer des clés cryptographiques à partir de données secrètes, comme les mots de passe ou les clés privées. PBKDF2HMAC est une KDF basée sur HMAC et il est conçu pour résister aux attaques par force brute et attaques par dictionnaire.
+Il est préférable d'utiliser un algorithme de dérivation de clé tel que PBKDF2HMAC plutôt que de hacher directement le sel et la clé. PBKDF2HMAC est conçu pour être lent et coûteux en termes de temps de calcul, ce qui rend les attaques par force brute moins efficaces. De plus, il permet un nombre configurable d'itérations, ce qui peut augmenter la sécurité en fonction des besoins. HMAC, d'un autre côté, est un algorithme de hachage à clé et ne serait pas adapté pour générer un sel et une clé sécurisés pour le chiffrement.
 
 # Question 3 
 
